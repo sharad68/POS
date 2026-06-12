@@ -1,0 +1,16 @@
+services:
+  android-builder:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: pos-android-builder
+    working_dir: /app
+    volumes:
+      - ..:/app                      # mount the whole project
+      - /app/node_modules            # keep container's Linux node_modules separate from host
+      - npm-cache:/root/.npm         # cache npm downloads between builds
+      - gradle-cache:/root/.gradle   # cache Gradle downloads between builds
+
+volumes:
+  npm-cache:
+  gradle-cache:
